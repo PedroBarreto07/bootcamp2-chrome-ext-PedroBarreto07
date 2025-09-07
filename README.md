@@ -10,7 +10,7 @@ Uma extensão **Manifest V3** minimalista para o Chrome: Pomodoro com badge no �
 
 > Compatível com **Chrome 114+**. Não há dependências nativas/Node no runtime da extensão.
 
-## 🎯 Objetivos do Projeto
+## 🎯 Objetivos do Projeto!
 - Entregar um **popup funcional** (UI simples) e um **service worker** com eventos (alarms, storage, runtime).
 - Aplicar **princípio do menor privilégio** em `permissions`.
 - Opcional: **content script** injetado em um domínio específico.
