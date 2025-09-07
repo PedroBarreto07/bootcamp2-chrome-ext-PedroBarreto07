@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FocusFox</title>
+    <link rel="stylesheet" href="../styles/global.css" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="popup-container">
+      <header class="brand">
+        <img src="../../assets/logo.svg" alt="FocusFox" width="20" height="20" />
+        <h1>FocusFox</h1>
+      </header>
+
+      <section class="timer">
+        <div id="phase" class="phase">pronto</div>
+        <div id="time" class="time">25:00</div>
+      </section>
+
+      <div class="controls">
+        <button id="start">Iniciar</button>
+        <button id="pause">Pausar</button>
+        <button id="reset">Resetar</button>
+      </div>
+
+      <p class="hint">
+        Dica: ajuste tempos em <a href="../options/options.html" target="_blank">Opções</a>.
+      </p>
+
+      <div id="status" class="status" aria-live="polite"></div>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

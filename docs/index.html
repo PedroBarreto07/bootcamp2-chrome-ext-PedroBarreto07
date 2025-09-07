@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FocusFox — Extensão MV3</title>
+    <style>
+      body { font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial; margin:0; color:#111; }
+      header { display:flex; align-items:center; gap:12px; padding:20px; border-bottom:1px solid #eee; }
+      header img { width:28px; height:28px; }
+      main { max-width: 860px; margin: 0 auto; padding: 20px; }
+      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+      .card { border:1px solid #eee; border-radius: 16px; padding: 16px; box-shadow: 0 2px 12px rgba(0,0,0,.04); }
+      .timer { text-align:center; }
+      .time { font-size: 48px; font-weight: 800; letter-spacing: 2px; }
+      button { padding: 8px 14px; border:1px solid #ddd; border-radius: 12px; background:#fff; cursor:pointer; }
+      footer { border-top:1px solid #eee; padding: 16px; text-align:center; color:#666; font-size: 14px; }
+      @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+      code { background:#f8f8f8; padding:2px 6px; border-radius: 6px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img src="../icons/icon32.png" alt="FocusFox"/>
+      <h1>FocusFox — Pomodoro & Highlighter</h1>
+    </header>
+    <!-- Demo hospedado em: https://PedroBarreto07.github.io/bootcamp2-chrome-ext-PedroBarreto07/ -->
+    <main>
+      <p>Extensão para Chrome (Manifest V3) com um Pomodoro simples (badge no ícone) e um content script opcional que destaca links em <code>developer.chrome.com</code>. Esta página é a “versão web” do popup para demonstração.</p>
+      <div class="grid">
+        <section class="card">
+          <h2>Demo ao vivo (versão web)</h2>
+          <div class="timer">
+            <div id="phase" class="phase">pronto</div>
+            <div id="time" class="time">25:00</div>
+            <div style="margin-top:12px; display:flex; gap:10px; justify-content:center;">
+              <button id="start">Iniciar</button>
+              <button id="pause">Pausar</button>
+              <button id="reset">Resetar</button>
+            </div>
+          </div>
+        </section>
+        <section class="card">
+          <h2>Como instalar (modo desenvolvedor)</h2>
+          <ol>
+            <li>Baixe o .zip da Release (ou use o botão abaixo).</li>
+            <li>Abra <code>chrome://extensions</code> e ative <em>Developer mode</em>.</li>
+            <li>Clique em <em>Load unpacked</em> e selecione a pasta descompactada.</li>
+            <li>Abra o popup pelo ícone da extensão e inicie um ciclo de foco.</li>
+          </ol>
+          <p>
+            <a id="zip" href="https://github.com/PedroBarreto07/bootcamp2-chrome-ext-PedroBarreto07/releases/latest" target="_blank">Baixar .zip (Release)</a> (coloque aqui o link da sua Release no GitHub)
+          </p>
+        </section>
+      </div>
+      <section class="card" style="margin-top:20px;">
+        <h2>Permissões</h2>
+        <ul>
+          <li><code>storage</code>: salvar preferências e estado do timer.</li>
+          <li><code>alarms</code>: notificar fim de períodos e atualizar o badge a cada minuto.</li>
+        </ul>
+      </section>
+      <section class="card" style="margin-top:20px;">
+        <h2>FAQ rápido</h2>
+        <details>
+          <summary>Por que não vejo segundos no badge?</summary>
+          <p>O MV3 não garante execução contínua no background. Por isso usamos <code>chrome.alarms</code> por minuto para manter o badge leve e confiável.</p>
+        </details>
+        <details>
+          <summary>O que o content script faz?</summary>
+          <p>Somente destaca links em <code>developer.chrome.com</code> quando ativado nas opções. Mantemos privilégios mínimos.</p>
+        </details>
+      </section>
+    </main>
+    <footer>Licença MIT • Feito para o Bootcamp II</footer>
+    <script>
+      // Versão web do timer (sem chrome.* APIs): usa apenas setInterval.
+      let phase = 'ocioso';
+      let work = 25, brk = 5;
+      let endAt = null;
+      const timeEl = document.getElementById('time');
+      const phaseEl = document.getElementById('phase');
+      const start = document.getElementById('start');
+      const pause = document.getElementById('pause');
+      const reset = document.getElementById('reset');
+
+      function fmt(ms) {
+        const total = Math.max(0, Math.floor(ms/1000));
+        const m = Math.floor(total/60), s = total % 60;
+        return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+      }
+      function render() {
+        if (!endAt) { timeEl.textContent = fmt(work*60*1000); phaseEl.textContent = 'pronto'; return; }
+        const rem = endAt - Date.now();
+        timeEl.textContent = fmt(rem);
+        phaseEl.textContent = phase;
+        if (rem <= 0) {
+          if (phase === 'foco') { phase = 'descanso'; endAt = Date.now() + brk*60*1000; }
+          else { phase = 'ocioso'; endAt = null; }
+        }
+      }
+      setInterval(render, 250);
+
+      start.onclick = () => { if (phase==='ocioso'){ phase='foco'; endAt = Date.now()+work*60*1000; } };
+      pause.onclick = () => { /* web demo simples não pausa estado */ };
+      reset.onclick = () => { phase='ocioso'; endAt=null; render(); };
+      render();
+    </script>
+  </body>
+</html>

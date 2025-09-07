@@ -1,0 +1,5 @@
+/* estilos simples e reutilizáveis */
+:root { --bg: #fff; --fg: #111; --muted: #666; }
+* { box-sizing: border-box; }
+a { color: #f97316; text-decoration: none; }
+a:hover { text-decoration: underline; }
