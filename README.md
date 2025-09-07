@@ -1,4 +1,4 @@
-# Extensao_Google: 
+# Extensao_Google: CheckList completa para o Google Chrome!!!
 # FocusFox — Pomodoro & Highlighter (MV3)
 ## Links importantes
 - Repositório: https://github.com/PedroBarreto07/bootcamp2-chrome-ext-PedroBarreto07
