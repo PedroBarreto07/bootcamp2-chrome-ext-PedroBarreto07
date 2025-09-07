@@ -17,7 +17,7 @@ Uma extensão **Manifest V3** minimalista para o Chrome: Pomodoro com badge no �
 - Publicar **landing page** no GitHub Pages (versão web do popup).
 - Preparar **.zip** (Release) e documentação clara.
 
-## 🗂️ Estrutura
+## 🗂️ Estrutura!
 ```
 focusfox-chrome-extension/
 ├─ src/
@@ -54,7 +54,7 @@ focusfox-chrome-extension/
 3. Clique em **Load unpacked** e selecione a pasta descompactada.
 4. Clique no ícone da extensão para abrir o popup.
 
-## 🚦 Uso
+## 🚦 Uso!
 - **Iniciar**: começa um ciclo de foco. O background arma um `alarm` para o fim do período e atualiza o **badge** por minuto.
 - **Pausar**: pausa o ciclo atual (mantém o restante).
 - **Resetar**: limpa estado e badge.
@@ -62,25 +62,25 @@ focusfox-chrome-extension/
 
 > Nota técnica: em MV3 o service worker pode hibernar; por isso o badge é atualizado **por minuto** via `chrome.alarms` em vez de por segundo.
 
-## 🔐 Permissões
+## 🔐 Permissões!
 - `storage`: salvar preferências e estado.
 - `alarms`: disparo de eventos no fim do período e “tick” por minuto.
 - _(sem `tabs` e sem `host_permissions`)_: o content script é carregado apenas via `content_scripts` no domínio especificado.
 
-## 🧪 Testes rápidos
+## 🧪 Testes rápidos!
 - Abra o popup e inicie um ciclo. Verifique o **badge** com contagem em minutos.
 - Acesse `https://developer.chrome.com/` e veja os **links destacados** (se habilitado em Opções).
 - Confira o log do service worker em `chrome://extensions → Service Worker (Inspect)`.
 
-## 🌐 GitHub Pages
+## 🌐 GitHub Pages!
 Publicação recomendada: **Settings → Pages → Branch: `main` | Folder: `/docs`**.  
 A página `docs/index.html` contém uma **demo web** do popup + instruções e link para a Release.
 
-## 🧱 Padrão do Repositório
+## 🧱 Padrão do Repositório!
 - Nome sugerido: `-chrome-ext-<seu-usuario>`
 - Branch principal: `main`
 - `.gitignore`: inclua entradas comuns (ex.: `**/.DS_Store`)
 - Crie uma **Release** com o `.zip` da pasta da extensão.
 
-## 📜 Licença
+## 📜 Licença MIT!
 [MIT](./LICENSE)
