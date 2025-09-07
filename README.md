@@ -77,7 +77,7 @@ Publicação recomendada: **Settings → Pages → Branch: `main` | Folder: `/do
 A página `docs/index.html` contém uma **demo web** do popup + instruções e link para a Release.
 
 ## 🧱 Padrão do Repositório
-- Nome sugerido: `bootcamp2-chrome-ext-<seu-usuario>`
+- Nome sugerido: `-chrome-ext-<seu-usuario>`
 - Branch principal: `main`
 - `.gitignore`: inclua entradas comuns (ex.: `**/.DS_Store`)
 - Crie uma **Release** com o `.zip` da pasta da extensão.
